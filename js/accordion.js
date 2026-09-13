@@ -1,34 +1,36 @@
 /* =============================================================
    accordion.js — the FAQ list on the about page
-   Clicking a question opens its answer and closes the other one,
+   Clicking a question opens its answer and closes the others,
    so only a single answer is ever open.
+
+   All this file does is add or remove the class "is-open".
+   The sliding animation itself is done in CSS.
    ============================================================= */
 
 const accordionTriggers = document.querySelectorAll('.accordion-trigger');
+const accordionItems = document.querySelectorAll('.accordion-item');
 
-accordionTriggers.forEach(function (trigger) {
-  trigger.addEventListener('click', function () {
-    // closest() walks up the tree until it finds the matching parent
-    const item = trigger.closest('.accordion-item');
-    const panel = item.querySelector('.accordion-panel');
-    const isOpen = item.classList.contains('is-open');
+for (let i = 0; i < accordionTriggers.length; i++) {
 
-    // First close everything.
-    document.querySelectorAll('.accordion-item').forEach(function (other) {
-      other.classList.remove('is-open');
-      other.querySelector('.accordion-panel').style.maxHeight = null;
-      other.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
-    });
+  accordionTriggers[i].addEventListener('click', function () {
+    // The button sits inside <h3>, which sits inside <article class="accordion-item">.
+    // parentElement twice walks up to that article.
+    const item = this.parentElement.parentElement;
+
+    // Was this question already open before the click?
+    const wasOpen = item.classList.contains('is-open');
+
+    // Close every question first.
+    for (let j = 0; j < accordionItems.length; j++) {
+      accordionItems[j].classList.remove('is-open');
+      accordionItems[j].querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+    }
 
     // Then open this one — unless it was the one already open,
     // in which case the click simply closed it.
-    if (!isOpen) {
+    if (wasOpen === false) {
       item.classList.add('is-open');
-      trigger.setAttribute('aria-expanded', 'true');
-
-      // scrollHeight is the full height the answer needs. Setting it as
-      // max-height lets the CSS transition animate the opening.
-      panel.style.maxHeight = panel.scrollHeight + 'px';
+      this.setAttribute('aria-expanded', 'true');
     }
   });
-});
+}

@@ -115,11 +115,11 @@ textarea {
 }
 
 /* a clear focus ring for keyboard users */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
   outline: 3px solid var(--saffron);
   outline-offset: 3px;
 }
@@ -128,8 +128,9 @@ textarea:focus-visible {
 .container {
   width: 100%;
   max-width: var(--container);
-  margin-inline: auto;   /* centres the block horizontally */
-  padding-inline: 24px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .container.narrow {
@@ -137,7 +138,8 @@ textarea:focus-visible {
 }
 
 .section {
-  padding-block: var(--section-space);
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
 }
 
 .section-alt {
@@ -161,7 +163,8 @@ textarea:focus-visible {
 }
 
 .section-head-left {
-  margin-inline: 0;
+  margin-left: 0;
+  margin-right: 0;
   text-align: left;
 }
 
@@ -175,7 +178,7 @@ textarea:focus-visible {
 }
 
 .section-title {
-  font-size: clamp(30px, 4vw, 44px); /* min, preferred, max — scales with the viewport */
+  font-size: 42px;
   margin-bottom: 16px;
 }
 
@@ -244,7 +247,6 @@ textarea:focus-visible {
   background-color: rgba(255, 255, 255, 0.14);
   border-color: rgba(255, 255, 255, 0.55);
   color: var(--white);
-  backdrop-filter: blur(4px);
 }
 
 .btn-ghost:hover {
@@ -261,8 +263,7 @@ textarea:focus-visible {
   position: sticky;  /* stays pinned to the top while the page scrolls */
   top: 0;
   z-index: 50;
-  background-color: rgba(253, 249, 243, 0.92);
-  backdrop-filter: blur(10px);
+  background-color: rgba(253, 249, 243, 0.97);
   border-bottom: 1px solid var(--line);
   transition: box-shadow 0.25s ease, padding 0.25s ease;
 }
@@ -277,7 +278,8 @@ textarea:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding-block: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .logo {
@@ -316,7 +318,8 @@ textarea:focus-visible {
   color: var(--ink-soft);
   font-size: 15px;
   font-weight: 500;
-  padding-block: 6px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 /* an underline that grows out from the middle on hover */
@@ -384,7 +387,7 @@ textarea:focus-visible {
 
 .hero-image {
   width: 100%;
-  height: clamp(460px, 74vh, 720px);
+  height: 640px;
   object-fit: cover; /* fills the box without squashing the picture */
 }
 
@@ -392,21 +395,27 @@ textarea:focus-visible {
 .hero-slide::after {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: linear-gradient(100deg, rgba(20, 12, 6, 0.88) 8%, rgba(20, 12, 6, 0.55) 48%, rgba(20, 12, 6, 0.15) 100%);
 }
 
 .hero-caption {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  /* left:0 + right:0 + a max-width + auto margins centres the block */
   max-width: var(--container);
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
   color: var(--white);
 }
 
@@ -415,7 +424,7 @@ textarea:focus-visible {
 }
 
 .hero-title {
-  font-size: clamp(38px, 6vw, 70px);
+  font-size: 64px;
   color: var(--white);
   max-width: 15ch;
   margin-bottom: 20px;
@@ -446,7 +455,10 @@ textarea:focus-visible {
 /* every slide sits on top of the others and is faded out ... */
 .hero-slide {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.9s ease;
@@ -471,7 +483,8 @@ textarea:focus-visible {
   width: 52px;
   height: 52px;
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   font-size: 28px;
   line-height: 1;
   color: var(--white);
@@ -526,18 +539,19 @@ textarea:focus-visible {
 .page-hero {
   background-color: var(--sand);
   border-bottom: 1px solid var(--line);
-  padding-block: 84px 76px;
+  padding-top: 84px;
+  padding-bottom: 76px;
   text-align: center;
 }
 
 .page-title {
-  font-size: clamp(32px, 5vw, 52px);
+  font-size: 48px;
   margin-bottom: 16px;
 }
 
 .page-subtitle {
   max-width: 60ch;
-  margin-inline: auto;
+  margin: 0 auto;
   color: var(--muted);
 }
 
@@ -681,7 +695,8 @@ textarea:focus-visible {
   width: 22px;
   height: 22px;
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
   color: var(--white);
   background-color: var(--sage);
@@ -775,7 +790,8 @@ textarea:focus-visible {
 .cta-band {
   background: linear-gradient(120deg, var(--saffron) 0%, #c3641b 100%);
   color: var(--white);
-  padding-block: 64px;
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 
 .cta-inner {
@@ -787,7 +803,7 @@ textarea:focus-visible {
 }
 
 .cta-title {
-  font-size: clamp(26px, 3.4vw, 36px);
+  font-size: 34px;
   color: var(--white);
   margin-bottom: 8px;
 }
@@ -986,10 +1002,12 @@ textarea:focus-visible {
 
 .order-count {
   display: inline-grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   min-width: 28px;
   height: 28px;
-  padding-inline: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
@@ -1031,7 +1049,8 @@ textarea:focus-visible {
   width: 24px;
   height: 24px;
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
   line-height: 1;
   color: var(--muted);
@@ -1157,7 +1176,10 @@ textarea:focus-visible {
 
 .gallery-overlay {
   position: absolute;
-  inset: auto 0 0 0;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
   padding: 42px 20px 18px;
   font-size: 15px;
   font-weight: 500;
@@ -1170,7 +1192,7 @@ textarea:focus-visible {
 }
 
 .gallery-item:hover .gallery-overlay,
-.gallery-item:focus-visible .gallery-overlay {
+.gallery-item:focus .gallery-overlay {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1178,7 +1200,10 @@ textarea:focus-visible {
 /* full-screen viewer, shown by removing the hidden attribute in JavaScript */
 .lightbox {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -1224,7 +1249,8 @@ textarea:focus-visible {
 .lightbox-nav,
 .lightbox-close {
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   color: var(--white);
   background-color: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1480,7 +1506,8 @@ textarea:focus-visible {
   width: 30px;
   height: 30px;
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
   color: var(--saffron-dark);
   background-color: var(--sand);
@@ -1496,6 +1523,12 @@ textarea:focus-visible {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.35s ease;
+}
+
+/* 400px is comfortably taller than the longest answer, so the panel
+   slides fully open. JavaScript only has to add or remove .is-open */
+.accordion-item.is-open .accordion-panel {
+  max-height: 400px;
 }
 
 .accordion-panel p {
@@ -1558,7 +1591,8 @@ textarea:focus-visible {
 
 .social-list a {
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   width: 38px;
   height: 38px;
   font-size: 13px;
@@ -1574,7 +1608,8 @@ textarea:focus-visible {
 }
 
 .footer-bottom {
-  padding-block: 22px;
+  padding-top: 22px;
+  padding-bottom: 22px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 14px;
 }
@@ -1600,7 +1635,8 @@ textarea:focus-visible {
   width: 48px;
   height: 48px;
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
   color: var(--white);
   background-color: var(--ink);
@@ -1726,7 +1762,8 @@ textarea:focus-visible {
   .nav-link {
     display: block;
     width: 100%;
-    padding-block: 14px;
+    padding-top: 14px;
+    padding-bottom: 14px;
     font-size: 17px;
   }
 
@@ -1739,7 +1776,10 @@ textarea:focus-visible {
      inside the header and therefore shares the header's stacking context. */
   .nav-backdrop {
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 40;
     background-color: rgba(20, 12, 6, 0.5);
     animation: fadeIn 0.3s ease;
@@ -1753,7 +1793,13 @@ textarea:focus-visible {
 
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 
-  .hero-caption { padding-block: 40px; }
+  .hero-caption { padding-top: 40px; padding-bottom: 40px; }
+
+  /* headings step down one size on tablets */
+  .hero-title { font-size: 46px; }
+  .hero-image { height: 560px; }
+  .page-title { font-size: 38px; }
+  .section-title { font-size: 34px; }
 }
 
 /* --- phones --- */
@@ -1762,7 +1808,7 @@ textarea:focus-visible {
 
   body { font-size: 16px; }
 
-  .container { padding-inline: 18px; }
+  .container { padding-left: 18px; padding-right: 18px; }
 
   .grid-3,
   .grid-4,
@@ -1774,7 +1820,12 @@ textarea:focus-visible {
 
   .section-head { margin-bottom: 36px; }
 
-  .hero-image { height: 78vh; }
+  /* headings step down again on phones */
+  .hero-title { font-size: 36px; }
+  .hero-image { height: 520px; }
+  .page-title { font-size: 30px; }
+  .section-title { font-size: 28px; }
+  .cta-title { font-size: 26px; }
 
   .hero-actions .btn { flex-grow: 1; }
 
@@ -1788,13 +1839,9 @@ textarea:focus-visible {
 
   .search-input { width: 100%; }
 
-  /* the filter row scrolls sideways instead of stretching the page.
-     min-width: 0 lets a flex item shrink below the width of its contents */
+  /* the filter buttons wrap onto a second line instead of one long row */
   .filter-group {
-    min-width: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-bottom: 6px;
+    flex-wrap: wrap;
   }
 
   .filter-btn { white-space: nowrap; }

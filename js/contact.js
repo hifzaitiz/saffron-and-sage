@@ -48,6 +48,21 @@ function showValid(input, errorBox) {
   return true;
 }
 
+// Counts how many characters of a text are digits (0 to 9).
+function countDigits(text) {
+  let digits = 0;
+
+  for (let i = 0; i < text.length; i++) {
+    const character = text.charAt(i);
+
+    if (character >= '0' && character <= '9') {
+      digits = digits + 1;
+    }
+  }
+
+  return digits;
+}
+
 
 /* ---------- one check per field ---------- */
 
@@ -60,10 +75,6 @@ function validateName() {
   if (value.length < 3) {
     return showError(nameInput, nameError, 'That looks too short — at least 3 letters.');
   }
-  // A regular expression: letters, spaces, apostrophes, dots and hyphens only.
-  if (!/^[A-Za-z\s.'-]+$/.test(value)) {
-    return showError(nameInput, nameError, 'Please use letters only.');
-  }
   return showValid(nameInput, nameError);
 }
 
@@ -73,10 +84,24 @@ function validateEmail() {
   if (value === '') {
     return showError(emailInput, emailError, 'We need an email to confirm the booking.');
   }
-  // something @ something . at least two letters
-  if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(value)) {
+
+  // indexOf gives the position of a character, or -1 when it is not there.
+  const atPosition = value.indexOf('@');
+  const dotPosition = value.lastIndexOf('.');
+
+  // The @ must not be missing or first ...
+  if (atPosition < 1) {
+    return showError(emailInput, emailError, 'An email address needs an @ sign.');
+  }
+  // ... the dot must come after the @, with at least one letter between them,
+  // and at least two letters after it (".pk", ".com").
+  if (dotPosition < atPosition + 2 || dotPosition > value.length - 3) {
     return showError(emailInput, emailError, 'That email address does not look right.');
   }
+  if (value.indexOf(' ') !== -1) {
+    return showError(emailInput, emailError, 'An email address cannot contain a space.');
+  }
+
   return showValid(emailInput, emailError);
 }
 
@@ -86,9 +111,10 @@ function validatePhone() {
   if (value === '') {
     return showError(phoneInput, phoneError, 'A phone number is required for reservations.');
   }
-  // Keep only the digits, then count them.
-  const digits = value.replace(/\D/g, '');
-  if (digits.length < 10 || digits.length > 13) {
+
+  const digits = countDigits(value);
+
+  if (digits < 10 || digits > 13) {
     return showError(phoneInput, phoneError, 'Enter a valid number, for example 03001234567.');
   }
   return showValid(phoneInput, phoneError);
@@ -159,29 +185,21 @@ if (form) {
     charCount.textContent = messageInput.value.length;
   });
 
-  /* ---------- a visitor cannot pick a date in the past ---------- */
-  const todayValue = new Date().toISOString().split('T')[0]; // "2026-09-13"
-  dateInput.setAttribute('min', todayValue);
-
   /* ---------- the submit handler ---------- */
   form.addEventListener('submit', function (event) {
     event.preventDefault(); // stop the browser from reloading the page
 
-    // Run every check. They are stored first so that all messages appear,
-    // not just the first failing one.
-    const results = [
-      validateName(),
-      validateEmail(),
-      validatePhone(),
-      validateGuests(),
-      validateDate(),
-      validateMessage(),
-      validateConsent()
-    ];
+    // Start by assuming the form is fine, then run every check.
+    // All seven run on purpose, so every wrong field shows its own message.
+    let isFormValid = true;
 
-    const isFormValid = results.every(function (result) {
-      return result === true;
-    });
+    if (validateName() === false) { isFormValid = false; }
+    if (validateEmail() === false) { isFormValid = false; }
+    if (validatePhone() === false) { isFormValid = false; }
+    if (validateGuests() === false) { isFormValid = false; }
+    if (validateDate() === false) { isFormValid = false; }
+    if (validateMessage() === false) { isFormValid = false; }
+    if (validateConsent() === false) { isFormValid = false; }
 
     if (isFormValid) {
       formSuccess.hidden = false;
@@ -193,9 +211,10 @@ if (form) {
       charCount.textContent = '0';
 
       // take the green "valid" outlines off again
-      form.querySelectorAll('.is-valid').forEach(function (field) {
-        field.classList.remove('is-valid');
-      });
+      const validFields = form.querySelectorAll('.is-valid');
+      for (let i = 0; i < validFields.length; i++) {
+        validFields[i].classList.remove('is-valid');
+      }
 
       formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
@@ -211,12 +230,17 @@ if (form) {
 
   /* ---------- clearing the form clears the messages too ---------- */
   resetBtn.addEventListener('click', function () {
-    form.querySelectorAll('.is-valid, .is-invalid').forEach(function (field) {
-      field.classList.remove('is-valid', 'is-invalid');
-    });
-    form.querySelectorAll('.error-message').forEach(function (box) {
-      box.textContent = '';
-    });
+    const markedFields = form.querySelectorAll('.is-valid, .is-invalid');
+    for (let i = 0; i < markedFields.length; i++) {
+      markedFields[i].classList.remove('is-valid');
+      markedFields[i].classList.remove('is-invalid');
+    }
+
+    const errorBoxes = form.querySelectorAll('.error-message');
+    for (let i = 0; i < errorBoxes.length; i++) {
+      errorBoxes[i].textContent = '';
+    }
+
     formSuccess.hidden = true;
     charCount.textContent = '0';
   });
