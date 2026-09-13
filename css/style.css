@@ -70,6 +70,8 @@ body {
   color: var(--ink-soft);
   background-color: var(--cream);
   -webkit-font-smoothing: antialiased;
+  /* the mobile menu is parked off the right edge, so hide sideways scrolling */
+  overflow-x: hidden;
 }
 
 img {
@@ -1680,6 +1682,8 @@ textarea:focus-visible {
   .nav-toggle {
     display: flex;
     order: 3;
+    position: relative;
+    z-index: 90; /* keeps the X on top of the open drawer */
   }
 
   .main-nav {
@@ -1730,11 +1734,13 @@ textarea:focus-visible {
 
   .nav-cta { margin-top: 24px; }
 
-  /* dark sheet behind the open drawer */
+  /* Dark sheet behind the open drawer.
+     Its z-index must stay below the header (50), because the drawer lives
+     inside the header and therefore shares the header's stacking context. */
   .nav-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 70;
+    z-index: 40;
     background-color: rgba(20, 12, 6, 0.5);
     animation: fadeIn 0.3s ease;
   }
@@ -1772,11 +1778,24 @@ textarea:focus-visible {
 
   .hero-actions .btn { flex-grow: 1; }
 
-  .menu-toolbar { flex-direction: column; align-items: stretch; }
+  /* stack the toolbar; nowrap keeps it as one single column line so the
+     filter row cannot push the page wider than the screen */
+  .menu-toolbar {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
 
   .search-input { width: 100%; }
 
-  .filter-group { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; }
+  /* the filter row scrolls sideways instead of stretching the page.
+     min-width: 0 lets a flex item shrink below the width of its contents */
+  .filter-group {
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 6px;
+  }
 
   .filter-btn { white-space: nowrap; }
 
