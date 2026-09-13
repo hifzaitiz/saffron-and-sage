@@ -11,6 +11,10 @@ Read this next to the actual files — do not memorise it, understand it.
 > stylesheet gives the presentation, and six small JavaScript files give the behaviour.
 > There is no server — everything runs in the browser."
 
+The code sticks to basics on purpose: `for` loops, `if` statements, functions, arrays and
+objects, and ordinary DOM methods. There are no regular expressions, no array helpers
+like `find` or `every`, and nothing from a library.
+
 ---
 
 ## 2. HTML questions
@@ -83,10 +87,11 @@ Ids are used as JavaScript hooks, not for styling.
 - `.menu-body` — `flex-direction: column` plus `margin-top: auto` on the button, which
   pushes every "Add to order" button to the bottom so the cards line up.
 
-### `clamp()`
+### How does the text resize on small screens?
 
-`font-size: clamp(30px, 4vw, 44px)` means: never smaller than 30px, never bigger than
-44px, and 4% of the viewport width in between. One line replaces three media queries.
+Plainly: each heading has one normal size, and the media queries at the bottom of the
+stylesheet give it a smaller size. `.section-title` is 42px by default, 34px under
+900px wide, and 28px under 640px.
 
 ### Positioning
 
@@ -134,7 +139,8 @@ of its own widths off the right edge. The class `.is-open` sets `translateX(0)` 
 | `textContent` | counters, error messages | write text safely |
 | `dataset` | `data-category`, `data-price`, `data-caption` | read custom attributes |
 | `setAttribute` | `aria-expanded`, date `min` | change attributes |
-| `closest()` | accordion | walk up to the parent item |
+| `parentElement` | accordion | step up to the parent element |
+| `getBoundingClientRect()` | scroll reveal | where an element sits in the window |
 
 ### Explain the slider loop
 
@@ -147,11 +153,17 @@ a manual click so the new slide gets a full turn.
 ### Explain the order planner
 
 `orderItems` is an array of objects, `{ name, price, qty }`.
-- **Add:** `find()` checks whether the dish is already there. If yes, `qty++`; if no,
-  `push` a new object.
-- **Remove:** `qty--`, and when it reaches 0, `splice(index, 1)` deletes the row.
-- **Render:** `renderOrder()` clears the list with `innerHTML = ''`, then loops the array
-  and builds one `<li>` per item, adding the price × quantity to a running total.
+
+- **Searching:** `findItemIndex(name)` is my own function. It loops through the array,
+  and if it finds a matching name it returns that position; if the loop finishes without
+  a match it returns `-1`.
+- **Add:** if the position is `-1` the dish is new, so `push` a new object. Otherwise
+  `orderItems[position].qty = orderItems[position].qty + 1`.
+- **Remove:** take one off the quantity, and when it reaches 0,
+  `splice(position, 1)` deletes that row from the array.
+- **Clear:** `orderItems = []` — a brand new empty array.
+- **Render:** `renderOrder()` empties the list with `innerHTML = ''`, then loops the
+  array and builds one `<li>` per item, adding price × quantity to a running total.
 
 The whole panel is redrawn from the array every time — the array is the truth, the HTML
 is just a picture of it.
@@ -161,20 +173,29 @@ is just a picture of it.
 Each field has its own function that returns `true` or `false` and writes a message into
 the `<small class="error-message">` under it.
 
+**The email check** uses `indexOf`, which gives the position of a character, or `-1`
+when it is not there:
+
 ```js
-if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(value)) { ... }
+const atPosition = value.indexOf('@');
+const dotPosition = value.lastIndexOf('.');
 ```
 
-Read that regular expression as: one or more characters that are not a space or `@`,
-then `@`, then the same again, then a dot, then at least two letters.
+Then three rules: the `@` must not be missing or first (`atPosition < 1`), the dot must
+come at least two places after the `@`, and there must be at least two letters after the
+dot. `lastIndexOf` is used so `hifza@mail.co.uk` is judged on the final dot.
+
+**The phone check** calls my own `countDigits()` function, which walks through the text
+one character at a time and counts the ones between `'0'` and `'9'`. That way spaces,
+dashes and `+92` are ignored and only the digits are counted.
 
 On submit:
 1. `event.preventDefault()` stops the page reloading.
-2. All seven checks run and their results go into an array — deliberately all of them,
-   so every wrong field shows its message, not just the first.
-3. `results.every(r => r === true)` asks "are they all true?".
-4. If yes: show the success banner and `form.reset()`. If no: `focus()` the first field
-   that has the `is-invalid` class.
+2. `isFormValid` starts as `true`, then all seven checks run — deliberately all of them,
+   so every wrong field shows its own message, not just the first one.
+3. Any check that returns `false` sets `isFormValid = false`.
+4. If it is still true: show the success banner and `form.reset()`. If not: `focus()`
+   the first field that has the `is-invalid` class.
 
 **What happens on valid input:** green border, error text cleared, success banner with
 the name and date, form cleared.
@@ -183,11 +204,43 @@ and the cursor jumps to the first problem.
 
 ### Explain the accordion
 
-On click it finds the item with `closest('.accordion-item')`, closes every item by
-setting `max-height` back to `null`, and — unless that item was already open — sets
-`panel.style.maxHeight = panel.scrollHeight + 'px'`. `scrollHeight` is the height the
-content actually needs, and because CSS has `transition: max-height 0.35s`, going from
-0 to that number animates the open.
+The JavaScript only adds and removes one class. On click it walks up from the button to
+its item with `this.parentElement.parentElement` (button → `<h3>` → `<article>`), notes
+whether that item was already open, removes `is-open` from every item, and adds it back
+to this one unless it was the one already open — which is what makes a second click
+close it.
+
+The sliding is pure CSS:
+
+```css
+.accordion-panel            { max-height: 0;     overflow: hidden;
+                              transition: max-height 0.35s ease; }
+.accordion-item.is-open
+  .accordion-panel          { max-height: 400px; }
+```
+
+400px is simply bigger than the tallest answer, and `max-height` only sets a limit, so
+the panel still ends up exactly as tall as its text.
+
+### Explain the fade-in when you scroll
+
+`revealOnScroll()` in `main.js` loops through the marked blocks and asks one question
+about each:
+
+```js
+const distanceFromTop = element.getBoundingClientRect().top;
+if (distanceFromTop < window.innerHeight - 80) {
+  element.classList.add('is-visible');
+}
+```
+
+`getBoundingClientRect().top` is how far the element is below the top of the **window**
+(it goes down as you scroll). `window.innerHeight` is the height of the window. So if
+the element's top has come above the bottom of the window, it is on screen and gets the
+class. The `- 80` just waits until it is properly in view rather than peeking.
+
+The function runs on every `scroll` event, and once when the page loads so that whatever
+is already on screen is shown immediately.
 
 ### Why does `main.js` add a `js` class to the body?
 

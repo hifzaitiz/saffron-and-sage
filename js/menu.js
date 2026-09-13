@@ -24,7 +24,7 @@ let activeCategory = 'all';
 let searchText = '';
 
 // The order is an array of objects: { name, price, qty }
-const orderItems = [];
+let orderItems = [];
 
 
 /* ---------- 1 & 2. FILTER + SEARCH ---------- */
@@ -33,21 +33,24 @@ const orderItems = [];
 function applyFilters() {
   let visibleCount = 0;
 
-  menuCards.forEach(function (card) {
+  for (let i = 0; i < menuCards.length; i++) {
+    const card = menuCards[i];
+
     // data-category="mains" is read through the dataset property
     const category = card.dataset.category;
     const name = card.querySelector('.menu-name').textContent.toLowerCase();
 
+    // Does this card pass both tests?
     const matchesCategory = (activeCategory === 'all' || category === activeCategory);
-    const matchesSearch = name.includes(searchText);
+    const matchesSearch = (name.indexOf(searchText) !== -1);
 
     if (matchesCategory && matchesSearch) {
       card.classList.remove('is-hidden');
-      visibleCount++;
+      visibleCount = visibleCount + 1;
     } else {
       card.classList.add('is-hidden'); // the CSS rule sets display: none
     }
-  });
+  }
 
   // Update the little line above the grid.
   if (visibleCount === menuCards.length) {
@@ -57,21 +60,27 @@ function applyFilters() {
   }
 
   // Show the "nothing found" note only when nothing is left.
-  emptyMessage.hidden = (visibleCount !== 0);
+  if (visibleCount === 0) {
+    emptyMessage.hidden = false;
+  } else {
+    emptyMessage.hidden = true;
+  }
 }
 
 // Clicking a filter button: move the is-active class, then re-filter.
-filterButtons.forEach(function (button) {
-  button.addEventListener('click', function () {
-    filterButtons.forEach(function (other) {
-      other.classList.remove('is-active');
-    });
-    button.classList.add('is-active');
+for (let i = 0; i < filterButtons.length; i++) {
+  filterButtons[i].addEventListener('click', function () {
+    // take the class off every button ...
+    for (let j = 0; j < filterButtons.length; j++) {
+      filterButtons[j].classList.remove('is-active');
+    }
+    // ... then put it on the one that was clicked
+    this.classList.add('is-active');
 
-    activeCategory = button.dataset.filter;
+    activeCategory = this.dataset.filter;
     applyFilters();
   });
-});
+}
 
 // The "input" event fires on every keystroke, so the list filters live.
 if (searchInput) {
@@ -84,6 +93,17 @@ if (searchInput) {
 
 /* ---------- 3. THE ORDER LIST ---------- */
 
+// Looks for a dish in the order and gives back its position,
+// or -1 when it is not on the list yet.
+function findItemIndex(name) {
+  for (let i = 0; i < orderItems.length; i++) {
+    if (orderItems[i].name === name) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 // Redraws the whole panel from the orderItems array.
 function renderOrder() {
   orderList.innerHTML = ''; // clear what is there before drawing again
@@ -91,9 +111,12 @@ function renderOrder() {
   let total = 0;
   let pieces = 0;
 
-  orderItems.forEach(function (item, index) {
-    total += item.price * item.qty;
-    pieces += item.qty;
+  for (let i = 0; i < orderItems.length; i++) {
+    const item = orderItems[i];
+    const linePrice = item.price * item.qty;
+
+    total = total + linePrice;
+    pieces = pieces + item.qty;
 
     // <li class="order-item"> ... </li>
     const li = document.createElement('li');
@@ -108,7 +131,7 @@ function renderOrder() {
     qtySpan.textContent = '× ' + item.qty;
 
     const priceSpan = document.createElement('span');
-    priceSpan.textContent = 'Rs ' + (item.price * item.qty).toLocaleString('en-US');
+    priceSpan.textContent = 'Rs ' + linePrice;
 
     const removeBtn = document.createElement('button');
     removeBtn.className = 'remove-btn';
@@ -118,10 +141,14 @@ function renderOrder() {
 
     // Take one off, and drop the row completely when it reaches zero.
     removeBtn.addEventListener('click', function () {
-      item.qty--;
-      if (item.qty === 0) {
-        orderItems.splice(index, 1); // remove 1 item at this position
+      const position = findItemIndex(item.name);
+
+      orderItems[position].qty = orderItems[position].qty - 1;
+
+      if (orderItems[position].qty === 0) {
+        orderItems.splice(position, 1); // remove 1 item at this position
       }
+
       renderOrder();
     });
 
@@ -130,28 +157,33 @@ function renderOrder() {
     li.appendChild(priceSpan);
     li.appendChild(removeBtn);
     orderList.appendChild(li);
-  });
+  }
 
   orderCount.textContent = pieces;
-  orderTotal.textContent = 'Rs ' + total.toLocaleString('en-US');
-  orderEmpty.hidden = (orderItems.length > 0); // hide the placeholder once something is added
+  orderTotal.textContent = 'Rs ' + total;
+
+  // hide the placeholder once something is added
+  if (orderItems.length > 0) {
+    orderEmpty.hidden = true;
+  } else {
+    orderEmpty.hidden = false;
+  }
 }
 
 // Every "Add to order" button on the page.
-addButtons.forEach(function (button) {
-  button.addEventListener('click', function () {
+for (let i = 0; i < addButtons.length; i++) {
+  addButtons[i].addEventListener('click', function () {
+    const button = this;
     const name = button.dataset.name;
     const price = Number(button.dataset.price); // data attributes are text, so convert
 
     // Is this dish already on the list?
-    const existing = orderItems.find(function (item) {
-      return item.name === name;
-    });
+    const position = findItemIndex(name);
 
-    if (existing) {
-      existing.qty++;
-    } else {
+    if (position === -1) {
       orderItems.push({ name: name, price: price, qty: 1 });
+    } else {
+      orderItems[position].qty = orderItems[position].qty + 1;
     }
 
     renderOrder();
@@ -165,12 +197,12 @@ addButtons.forEach(function (button) {
       button.textContent = 'Add to order';
     }, 1200); // milliseconds
   });
-});
+}
 
 // Empty the whole list.
 if (clearOrder) {
   clearOrder.addEventListener('click', function () {
-    orderItems.length = 0; // quickest way to empty an array
+    orderItems = []; // a brand new empty array
     renderOrder();
   });
 }

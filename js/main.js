@@ -42,7 +42,7 @@ function closeNav() {
   navToggle.setAttribute('aria-label', 'Open menu');
   document.body.style.overflow = '';
 
-  if (backdrop) {
+  if (backdrop !== null) {
     backdrop.remove();
     backdrop = null;
   }
@@ -59,9 +59,10 @@ if (navToggle && primaryNav) {
   });
 
   // Tapping any link inside the drawer closes it as well.
-  primaryNav.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', closeNav);
-  });
+  const drawerLinks = primaryNav.querySelectorAll('a');
+  for (let i = 0; i < drawerLinks.length; i++) {
+    drawerLinks[i].addEventListener('click', closeNav);
+  }
 
   // The Escape key closes the drawer.
   document.addEventListener('keydown', function (event) {
@@ -79,23 +80,61 @@ if (navToggle && primaryNav) {
 }
 
 
-/* ---------- 2 & 3. SCROLL EFFECTS ---------- */
+/* ---------- 5. REVEAL ON SCROLL (set up first, used below) ---------- */
+
+// Collect the blocks that should fade in, and mark each one.
+const revealTargets = document.querySelectorAll(
+  '.section-head, .highlight-card, .value-card, .dish-card, .team-card, ' +
+  '.contact-card, .split-media, .split-body, .timeline-item, .quote-card, .table-wrap'
+);
+
+for (let r = 0; r < revealTargets.length; r++) {
+  revealTargets[r].classList.add('reveal');
+}
+
+// Shows every block that has reached the visible part of the window.
+function revealOnScroll() {
+  for (let i = 0; i < revealTargets.length; i++) {
+    const element = revealTargets[i];
+
+    // getBoundingClientRect().top = distance from the top of the window.
+    // window.innerHeight = the height of the window.
+    // So if the top of the block is above the bottom of the window, it is on screen.
+    const distanceFromTop = element.getBoundingClientRect().top;
+
+    if (distanceFromTop < window.innerHeight - 80) {
+      element.classList.add('is-visible');
+    }
+  }
+}
+
+
+/* ---------- 2, 3 & 5. SCROLL EFFECTS ---------- */
 
 const siteHeader = document.getElementById('siteHeader');
 const backToTop = document.getElementById('backToTop');
 
-// One scroll listener handles both the header shadow and the button.
+// One scroll listener handles the header shadow, the button and the fade-ins.
 window.addEventListener('scroll', function () {
   const scrolled = window.scrollY; // how far down the page we are, in pixels
 
   if (siteHeader) {
-    // classList.toggle(name, condition) adds the class when the condition is true
-    siteHeader.classList.toggle('is-scrolled', scrolled > 20);
+    if (scrolled > 20) {
+      siteHeader.classList.add('is-scrolled');
+    } else {
+      siteHeader.classList.remove('is-scrolled');
+    }
   }
 
   if (backToTop) {
-    backToTop.classList.toggle('is-visible', scrolled > 500);
+    if (scrolled > 500) {
+      backToTop.classList.add('is-visible');
+    } else {
+      backToTop.classList.remove('is-visible');
+    }
   }
+
+  revealOnScroll();
 });
 
 if (backToTop) {
@@ -104,6 +143,9 @@ if (backToTop) {
   });
 }
 
+// Run it once at load, for whatever is already on screen.
+revealOnScroll();
+
 
 /* ---------- 4. FOOTER YEAR ---------- */
 
@@ -111,38 +153,4 @@ if (backToTop) {
 const yearSpan = document.getElementById('year');
 if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
-}
-
-
-/* ---------- 5. REVEAL ON SCROLL ---------- */
-
-// Collect the blocks that should fade in, and mark them.
-const revealTargets = document.querySelectorAll(
-  '.section-head, .highlight-card, .value-card, .dish-card, .team-card, ' +
-  '.contact-card, .split-media, .split-body, .timeline-item, .quote-card, .table-wrap'
-);
-
-revealTargets.forEach(function (element) {
-  element.classList.add('reveal');
-});
-
-// IntersectionObserver tells us when an element enters the visible screen.
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target); // animate once, then stop watching
-      }
-    });
-  }, { threshold: 0.15 }); // fire when 15% of the element is on screen
-
-  revealTargets.forEach(function (element) {
-    observer.observe(element);
-  });
-} else {
-  // Very old browser: just show everything straight away.
-  revealTargets.forEach(function (element) {
-    element.classList.add('is-visible');
-  });
 }

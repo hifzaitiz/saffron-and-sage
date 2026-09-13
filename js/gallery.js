@@ -13,22 +13,23 @@ const lightboxClose = document.getElementById('lightboxClose');
 const lightboxPrev = document.getElementById('lightboxPrev');
 const lightboxNext = document.getElementById('lightboxNext');
 
-let currentImage = 0;      // which photo is open
-let lastClicked = null;    // so we can put the keyboard focus back afterwards
+let currentImage = 0;   // which photo is open
+let lastClicked = null; // so we can put the keyboard focus back afterwards
 
 if (galleryItems.length > 0 && lightbox) {
 
   /* ---------- collect the photo details once, into an array ---------- */
   const photos = [];
 
-  galleryItems.forEach(function (item) {
-    const picture = item.querySelector('img');
+  for (let i = 0; i < galleryItems.length; i++) {
+    const picture = galleryItems[i].querySelector('img');
+
     photos.push({
       src: picture.getAttribute('src'),
       alt: picture.getAttribute('alt'),
-      caption: item.dataset.caption // comes from data-caption="..."
+      caption: galleryItems[i].dataset.caption // comes from data-caption="..."
     });
-  });
+  }
 
   /* ---------- put one photo into the viewer ---------- */
   function showImage(index) {
@@ -62,7 +63,7 @@ if (galleryItems.length > 0 && lightbox) {
     lightbox.hidden = true;
     document.body.style.overflow = '';
 
-    if (lastClicked) {
+    if (lastClicked !== null) {
       lastClicked.focus(); // return focus to the thumbnail that was clicked
     }
   }
@@ -70,11 +71,11 @@ if (galleryItems.length > 0 && lightbox) {
   /* ---------- events ---------- */
 
   // Each thumbnail opens the viewer at its own position.
-  galleryItems.forEach(function (item, index) {
-    item.addEventListener('click', function () {
-      openLightbox(index, item);
+  for (let i = 0; i < galleryItems.length; i++) {
+    galleryItems[i].addEventListener('click', function () {
+      openLightbox(i, galleryItems[i]);
     });
-  });
+  }
 
   lightboxClose.addEventListener('click', closeLightbox);
 
@@ -86,7 +87,9 @@ if (galleryItems.length > 0 && lightbox) {
     showImage(currentImage - 1);
   });
 
-  // Clicking the dark area (but not the picture itself) closes the viewer.
+  // Clicking the dark area closes the viewer.
+  // event.target is the exact element that was clicked, so this only
+  // runs when the click landed on the dark sheet, not on the photo.
   lightbox.addEventListener('click', function (event) {
     if (event.target === lightbox) {
       closeLightbox();

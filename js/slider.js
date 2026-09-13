@@ -11,7 +11,7 @@ const nextButton = document.getElementById('sliderNext');
 const dotsBox = document.getElementById('sliderDots');
 const slider = document.getElementById('heroSlider');
 
-let currentSlide = 0;    // which slide is showing right now
+let currentSlide = 0;     // which slide is showing right now
 let autoPlayTimer = null; // the id returned by setInterval, so we can stop it
 const SLIDE_DELAY = 6000; // milliseconds each slide stays on screen
 
@@ -19,24 +19,26 @@ const SLIDE_DELAY = 6000; // milliseconds each slide stays on screen
 if (slides.length > 0) {
 
   /* ---------- build one dot per slide ---------- */
-  slides.forEach(function (slide, index) {
+  for (let i = 0; i < slides.length; i++) {
     const dot = document.createElement('button');
     dot.className = 'slider-dot';
     dot.type = 'button';
-    dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
 
-    if (index === 0) {
+    if (i === 0) {
       dot.classList.add('is-active');
     }
 
     // Clicking a dot jumps straight to that slide.
+    // "let i" gives each loop turn its own copy of i, so every dot
+    // remembers its own number.
     dot.addEventListener('click', function () {
-      showSlide(index);
+      showSlide(i);
       restartAutoPlay();
     });
 
     dotsBox.appendChild(dot);
-  });
+  }
 
   const dots = dotsBox.querySelectorAll('.slider-dot');
 
@@ -50,13 +52,13 @@ if (slides.length > 0) {
       index = slides.length - 1;
     }
 
-    slides.forEach(function (slide) {
-      slide.classList.remove('is-active');
-    });
-    dots.forEach(function (dot) {
-      dot.classList.remove('is-active');
-    });
+    // turn everything off ...
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove('is-active');
+      dots[i].classList.remove('is-active');
+    }
 
+    // ... then turn the chosen one on
     slides[index].classList.add('is-active');
     dots[index].classList.add('is-active');
 

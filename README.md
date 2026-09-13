@@ -3,7 +3,8 @@
 A fully static, five-page website built with **HTML5, CSS3 and vanilla JavaScript**
 for the Web Technologies assignment (BS CS F24 — Morning &amp; Self Support).
 
-No backend, no database, no frameworks, no CSS libraries. Every line of HTML, CSS and
+No backend, no database, no frameworks, no CSS libraries, and deliberately no advanced
+JavaScript — plain `for` loops, `if` statements and simple DOM methods throughout. Every line of HTML, CSS and
 JavaScript in this repository was written for this project, and all the artwork in
 `images/` is original SVG.
 
@@ -31,12 +32,12 @@ Six interactive features, split into one file per job.
 
 | File | Feature | Main ideas used |
 | --- | --- | --- |
-| `js/main.js` | Hamburger menu, sticky-header shadow, back-to-top button, footer year, scroll reveal | `addEventListener`, `classList.toggle`, `createElement` / `appendChild` / `remove`, `IntersectionObserver`, `Date` |
+| `js/main.js` | Hamburger menu, sticky-header shadow, back-to-top button, footer year, scroll reveal | `addEventListener`, `classList`, `createElement` / `appendChild` / `remove`, `getBoundingClientRect`, `Date` |
 | `js/slider.js` | Auto-playing hero carousel with arrows, dots and arrow-key control | `setInterval` / `clearInterval`, index wrap-around, dots built in a loop |
-| `js/menu.js` | Category filter, live search, add / remove / clear order list with a running total | `dataset`, `forEach`, `find`, `push`, `splice`, building list rows in the DOM |
+| `js/menu.js` | Category filter, live search, add / remove / clear order list with a running total | `dataset`, `for` loops, an array of objects, `push` / `splice`, building list rows in the DOM |
 | `js/gallery.js` | Lightbox viewer with next / previous, counter, Escape and arrow keys | array of photo objects, `hidden` property, keyboard events, focus handling |
-| `js/contact.js` | Field-by-field form validation with inline messages and a success banner | `preventDefault`, regular expressions, `trim`, `every`, date comparison |
-| `js/accordion.js` | FAQ list where only one answer is open at a time | `closest`, `scrollHeight`, animating `max-height` |
+| `js/contact.js` | Field-by-field form validation with inline messages and a success banner | `preventDefault`, `trim`, `indexOf`, character counting, date comparison |
+| `js/accordion.js` | FAQ list where only one answer is open at a time | `parentElement`, adding and removing one class (CSS does the animation) |
 
 ---
 
@@ -48,8 +49,8 @@ sixteen labelled sections.
 - **Design tokens** — colours, fonts, radii and shadows live in CSS variables on `:root`.
 - **Layout** — CSS **Grid** for every card row, the menu layout, the gallery and the
   footer; **Flexbox** for the header, toolbars, buttons and card internals.
-- **Typography** — Fraunces for headings, Inter for body text, sized with `clamp()`
-  so the type scales smoothly between phone and desktop.
+- **Typography** — Fraunces for headings, Inter for body text, with heading sizes
+  stepped down at each breakpoint.
 - **Responsive** — three breakpoints: `1024px` (four columns become two),
   `900px` (navigation collapses into the hamburger drawer),
   `640px` (everything becomes a single column).
