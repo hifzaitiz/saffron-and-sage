@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Saffron &amp; Sage</title>
+  <meta name="description" content="Photographs of the Saffron &amp; Sage kitchen, rooftop, charcoal pit and the food that comes off it.">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+
+      <a class="logo" href="index.html">
+        <img src="images/logo.svg" alt="Saffron and Sage logo" width="42" height="42">
+        <span class="logo-text">Saffron <em>&amp;</em> Sage</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <nav class="main-nav" id="primaryNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="menu.html" class="nav-link">Menu</a></li>
+          <li><a href="gallery.html" class="nav-link is-active">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Reserve a table</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ PAGE BANNER ============ -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Gallery</p>
+        <h1 class="page-title">The kitchen, the roof and the food</h1>
+        <p class="page-subtitle">Click any photograph to open it full size. Use the arrow keys to move between them.</p>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY GRID ============ -->
+    <section class="section">
+      <div class="container">
+
+        <div class="gallery-grid" id="galleryGrid">
+
+          <button class="gallery-item" type="button" data-index="0"
+                  data-caption="The charcoal pit at seven in the evening, right before the rush.">
+            <img src="images/gallery-1.svg" alt="The charcoal grill loaded with skewers">
+            <span class="gallery-overlay">The charcoal pit</span>
+          </button>
+
+          <button class="gallery-item gallery-item-wide" type="button" data-index="1"
+                  data-caption="Twenty rooftop tables set for dinner, facing the old city.">
+            <img src="images/gallery-2.svg" alt="Rooftop dining tables at dusk">
+            <span class="gallery-overlay">Rooftop at dusk</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-index="2"
+                  data-caption="Roghni naan coming off the tandoor wall, still blistering.">
+            <img src="images/gallery-3.svg" alt="Fresh naan coming out of the tandoor">
+            <span class="gallery-overlay">Fresh from the tandoor</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-index="3"
+                  data-caption="Whole spices roasted every morning before they are ground.">
+            <img src="images/gallery-4.svg" alt="Bowls of whole spices on a steel tray">
+            <span class="gallery-overlay">The morning masala</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-index="4"
+                  data-caption="Sindhi biryani plated with a wedge of lemon and raita on the side.">
+            <img src="images/gallery-5.svg" alt="A plated portion of biryani">
+            <span class="gallery-overlay">Biryani, plated</span>
+          </button>
+
+          <button class="gallery-item gallery-item-wide" type="button" data-index="5"
+                  data-caption="The main dining room, where the original six tables used to stand.">
+            <img src="images/gallery-6.svg" alt="The indoor dining room with arched windows">
+            <span class="gallery-overlay">The dining room</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-index="6"
+                  data-caption="Kashmiri chai whisked until it turns pink, which takes patience.">
+            <img src="images/gallery-7.svg" alt="A cup of pink Kashmiri chai">
+            <span class="gallery-overlay">Pink chai</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-index="7"
+                  data-caption="Nihari going into the pot at four in the morning.">
+            <img src="images/gallery-8.svg" alt="A large pot of nihari on the stove">
+            <span class="gallery-overlay">Four in the morning</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-index="8"
+                  data-caption="Brass lamps in the stairwell, bought from a shop on Fort Road in 1998.">
+            <img src="images/gallery-9.svg" alt="Brass hanging lamps in the stairwell">
+            <span class="gallery-overlay">Brass and warm light</span>
+          </button>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ LIGHTBOX (opened by JavaScript) ============ -->
+    <div class="lightbox" id="lightbox" hidden>
+      <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Photograph viewer">
+
+        <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close viewer">&times;</button>
+
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous photograph">&#8249;</button>
+
+        <figure class="lightbox-figure">
+          <img src="" alt="" class="lightbox-image" id="lightboxImage">
+          <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+        </figure>
+
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Next photograph">&#8250;</button>
+
+        <p class="lightbox-counter" id="lightboxCounter"></p>
+
+      </div>
+    </div>
+
+    <!-- ============ CALL TO ACTION ============ -->
+    <section class="cta-band">
+      <div class="container cta-inner">
+        <div>
+          <h2 class="cta-title">Photographs are nice. Dinner is better.</h2>
+          <p>The rooftop opens at 12pm and the light is best around seven.</p>
+        </div>
+        <a href="contact.html" class="btn btn-primary btn-lg">Reserve a table</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-col">
+        <a class="logo logo-footer" href="index.html">
+          <img src="images/logo.svg" alt="" width="38" height="38">
+          <span class="logo-text">Saffron <em>&amp;</em> Sage</span>
+        </a>
+        <p class="footer-about">A modern Pakistani kitchen in the walled city of Lahore. Charcoal, cast iron and recipes we refuse to modernise.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Explore</h3>
+        <ul class="footer-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Visit us</h3>
+        <ul class="footer-list">
+          <li>14 Fort Road, Walled City</li>
+          <li>Lahore, Punjab 54000</li>
+          <li><a href="tel:+924235551234">+92 42 3555 1234</a></li>
+          <li><a href="mailto:hello@saffronandsage.pk">hello@saffronandsage.pk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Kitchen hours</h3>
+        <ul class="footer-list">
+          <li>Mon &ndash; Thu &middot; 12pm &ndash; 11pm</li>
+          <li>Fri &middot; 2pm &ndash; 12am</li>
+          <li>Sat &ndash; Sun &middot; 12pm &ndash; 12am</li>
+        </ul>
+        <ul class="social-list">
+          <li><a href="#" aria-label="Facebook">Fb</a></li>
+          <li><a href="#" aria-label="Instagram">Ig</a></li>
+          <li><a href="#" aria-label="YouTube">Yt</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year">2026</span> Saffron &amp; Sage. Built for the Web Technologies course.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
