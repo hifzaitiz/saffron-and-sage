@@ -42,20 +42,59 @@
 
   <main>
 
-    <!-- ============ HERO ============ -->
-    <section class="hero">
-      <div class="hero-slide">
-        <img src="images/hero-1.svg" alt="Charcoal grilled kebabs on a brass platter" class="hero-image">
-        <div class="hero-caption container">
-          <p class="eyebrow">Lahore &middot; Since 1998</p>
-          <h1 class="hero-title">Slow food, <em>served fast</em> enough</h1>
-          <p class="hero-text">Family recipes from the old city, cooked over charcoal and served on a rooftop that looks straight at the Badshahi Mosque.</p>
-          <div class="hero-actions">
-            <a href="menu.html" class="btn btn-primary">Explore the menu</a>
-            <a href="contact.html" class="btn btn-ghost">Book a table</a>
+    <!-- ============ HERO SLIDER ============ -->
+    <!-- Three slides; JavaScript shows one at a time and builds the dots -->
+    <section class="hero" id="heroSlider">
+
+      <div class="slides" id="heroSlides">
+
+        <article class="hero-slide is-active">
+          <img src="images/hero-1.svg" alt="Charcoal grilled kebabs on a brass platter" class="hero-image">
+          <div class="hero-caption container">
+            <p class="eyebrow">Lahore &middot; Since 1998</p>
+            <h1 class="hero-title">Slow food, <em>served fast</em> enough</h1>
+            <p class="hero-text">Family recipes from the old city, cooked over charcoal and served on a rooftop that looks straight at the Badshahi Mosque.</p>
+            <div class="hero-actions">
+              <a href="menu.html" class="btn btn-primary">Explore the menu</a>
+              <a href="contact.html" class="btn btn-ghost">Book a table</a>
+            </div>
           </div>
-        </div>
+        </article>
+
+        <article class="hero-slide">
+          <img src="images/hero-2.svg" alt="Rooftop tables lit by brass lamps at dusk" class="hero-image">
+          <div class="hero-caption container">
+            <p class="eyebrow">The rooftop</p>
+            <h2 class="hero-title">Twenty tables, <em>one skyline</em></h2>
+            <p class="hero-text">Dinner under open sky from six in the evening, with the old city lighting up behind you.</p>
+            <div class="hero-actions">
+              <a href="gallery.html" class="btn btn-primary">See the rooftop</a>
+              <a href="contact.html" class="btn btn-ghost">Book a table</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-slide">
+          <img src="images/hero-3.svg" alt="Whole spices roasting before they are ground" class="hero-image">
+          <div class="hero-caption container">
+            <p class="eyebrow">Every morning</p>
+            <h2 class="hero-title">Spices ground <em>before sunrise</em></h2>
+            <p class="hero-text">Nothing is bought pre-mixed. The masala you taste tonight was whole seed this morning.</p>
+            <div class="hero-actions">
+              <a href="about.html" class="btn btn-primary">How we cook</a>
+              <a href="menu.html" class="btn btn-ghost">Read the menu</a>
+            </div>
+          </div>
+        </article>
+
       </div>
+
+      <button class="slider-arrow slider-prev" id="sliderPrev" type="button" aria-label="Previous slide">&#8249;</button>
+      <button class="slider-arrow slider-next" id="sliderNext" type="button" aria-label="Next slide">&#8250;</button>
+
+      <!-- the dots are created by slider.js, one per slide -->
+      <div class="slider-dots" id="sliderDots" role="tablist" aria-label="Choose a slide"></div>
+
     </section>
 
     <!-- ============ HIGHLIGHT STRIP ============ -->
@@ -270,6 +309,7 @@
 
   <!-- Scripts are at the end of the body so the HTML above already exists -->
   <script src="js/main.js"></script>
+  <script src="js/slider.js"></script>
 
 </body>
 </html>

@@ -436,6 +436,90 @@ textarea:focus-visible {
   gap: 14px;
 }
 
+/* --- slider mechanics --- */
+.slides {
+  position: relative;
+}
+
+/* every slide sits on top of the others and is faded out ... */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.9s ease;
+}
+
+/* ... except the active one, which is visible and gives the box its height */
+.hero-slide.is-active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* slow zoom on whichever picture is showing */
+.hero-slide.is-active .hero-image {
+  animation: kenburns 9s ease-out forwards;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--white);
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease;
+}
+
+.slider-arrow:hover {
+  background-color: var(--saffron);
+  border-color: var(--saffron);
+}
+
+.slider-prev { left: 24px; }
+.slider-next { right: 24px; }
+
+.slider-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+  transform: translateX(-50%);
+}
+
+.slider-dot {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.45);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.slider-dot.is-active {
+  width: 32px;
+  background-color: var(--saffron);
+}
+
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
 /* smaller banner used on the inner pages */
 .page-hero {
   background-color: var(--sand);
@@ -1717,4 +1801,9 @@ textarea:focus-visible {
   .lightbox-close { top: -50px; }
 
   .timeline { padding-left: 32px; }
+
+  /* the slider keeps its dots but loses the side arrows on a phone */
+  .slider-arrow { display: none; }
+
+  .slider-dots { bottom: 18px; }
 }
