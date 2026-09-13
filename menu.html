@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu | Saffron &amp; Sage</title>
+  <meta name="description" content="Browse the full Saffron &amp; Sage menu — starters, charcoal mains, tandoor breads, desserts and drinks. Filter by course and build your order.">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+
+      <a class="logo" href="index.html">
+        <img src="images/logo.svg" alt="Saffron and Sage logo" width="42" height="42">
+        <span class="logo-text">Saffron <em>&amp;</em> Sage</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <nav class="main-nav" id="primaryNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="menu.html" class="nav-link is-active">Menu</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Reserve a table</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ PAGE BANNER ============ -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Our menu</p>
+        <h1 class="page-title">Everything we cook, in one place</h1>
+        <p class="page-subtitle">Filter by course, search for a dish, and add what you like to your order list before you call us.</p>
+      </div>
+    </section>
+
+    <!-- ============ MENU + ORDER PANEL ============ -->
+    <section class="section">
+      <div class="container">
+
+        <!-- Toolbar: category filter buttons + live search box -->
+        <div class="menu-toolbar">
+          <div class="filter-group" id="filterGroup" role="group" aria-label="Filter dishes by course">
+            <button class="filter-btn is-active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="starters">Starters</button>
+            <button class="filter-btn" data-filter="mains">Mains</button>
+            <button class="filter-btn" data-filter="breads">Breads</button>
+            <button class="filter-btn" data-filter="desserts">Desserts</button>
+            <button class="filter-btn" data-filter="drinks">Drinks</button>
+          </div>
+
+          <div class="search-box">
+            <label for="dishSearch" class="sr-only">Search dishes</label>
+            <input type="search" id="dishSearch" class="search-input" placeholder="Search a dish, e.g. karahi">
+          </div>
+        </div>
+
+        <p class="result-count" id="resultCount">Showing all 16 dishes</p>
+
+        <div class="menu-layout">
+
+          <!-- ---- Dish grid ---- -->
+          <div class="menu-grid" id="menuGrid">
+
+            <!-- STARTERS -->
+            <article class="card menu-card" data-category="starters">
+              <img src="images/dish-seekh.svg" alt="Seekh kebabs on a skewer" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Seekh Kebab</h3>
+                  <span class="menu-price">Rs 650</span>
+                </div>
+                <p class="menu-desc">Hand-minced beef with coriander and green chilli, grilled over coal.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-hot">Spicy</li>
+                  <li class="tag tag-pick">Chef's pick</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Seekh Kebab" data-price="650">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="starters">
+              <img src="images/dish-boti.svg" alt="Chicken malai boti pieces" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Chicken Malai Boti</h3>
+                  <span class="menu-price">Rs 780</span>
+                </div>
+                <p class="menu-desc">Cream and cheese marinade, eight hours in the fridge, four minutes on the grill.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-mild">Mild</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Chicken Malai Boti" data-price="780">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="starters">
+              <img src="images/dish-bhalla.svg" alt="Dahi bhalla topped with yoghurt" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Dahi Bhalla</h3>
+                  <span class="menu-price">Rs 380</span>
+                </div>
+                <p class="menu-desc">Soft lentil dumplings in whipped yoghurt, tamarind and roasted cumin.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Dahi Bhalla" data-price="380">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="starters">
+              <img src="images/dish-chaat.svg" alt="Papri chaat with chutney" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Papri Chaat</h3>
+                  <span class="menu-price">Rs 350</span>
+                </div>
+                <p class="menu-desc">Crisp papri, chickpeas, potato and three chutneys assembled at the table.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Papri Chaat" data-price="350">Add to order</button>
+              </div>
+            </article>
+
+            <!-- MAINS -->
+            <article class="card menu-card" data-category="mains">
+              <img src="images/dish-karahi.svg" alt="Chicken karahi in an iron wok" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Chicken Karahi</h3>
+                  <span class="menu-price">Rs 1,450</span>
+                </div>
+                <p class="menu-desc">Wok-fried with tomato and green chilli, finished with ginger julienne. Serves two.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-hot">Spicy</li>
+                  <li class="tag tag-pick">Chef's pick</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Chicken Karahi" data-price="1450">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="mains">
+              <img src="images/dish-nihari.svg" alt="Bowl of mutton nihari" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Mutton Nihari</h3>
+                  <span class="menu-price">Rs 1,250</span>
+                </div>
+                <p class="menu-desc">Eight hours on low heat, served with marrow, fried onion and lemon.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-hot">Spicy</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Mutton Nihari" data-price="1250">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="mains">
+              <img src="images/dish-biryani.svg" alt="Plate of Sindhi biryani" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Sindhi Biryani</h3>
+                  <span class="menu-price">Rs 850</span>
+                </div>
+                <p class="menu-desc">Layered rice with potato, dried plum and a heavy hand with saffron.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-hot">Spicy</li>
+                  <li class="tag tag-pick">Chef's pick</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Sindhi Biryani" data-price="850">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="mains">
+              <img src="images/dish-daal.svg" alt="Bowl of daal makhani" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Daal Makhani</h3>
+                  <span class="menu-price">Rs 620</span>
+                </div>
+                <p class="menu-desc">Black lentils cooked overnight with butter and a spoon of cream.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                  <li class="tag tag-mild">Mild</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Daal Makhani" data-price="620">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="mains">
+              <img src="images/dish-paneer.svg" alt="Palak paneer curry" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Palak Paneer</h3>
+                  <span class="menu-price">Rs 700</span>
+                </div>
+                <p class="menu-desc">Spinach cooked down with garlic, folded around house-made paneer.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Palak Paneer" data-price="700">Add to order</button>
+              </div>
+            </article>
+
+            <!-- BREADS -->
+            <article class="card menu-card" data-category="breads">
+              <img src="images/dish-naan.svg" alt="Garlic naan bread" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Garlic Naan</h3>
+                  <span class="menu-price">Rs 180</span>
+                </div>
+                <p class="menu-desc">Slapped onto the tandoor wall, brushed with garlic butter and coriander.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Garlic Naan" data-price="180">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="breads">
+              <img src="images/dish-roghni.svg" alt="Roghni naan with sesame seeds" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Roghni Naan</h3>
+                  <span class="menu-price">Rs 150</span>
+                </div>
+                <p class="menu-desc">Enriched with milk and egg, finished with sesame and nigella seeds.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                  <li class="tag tag-pick">Chef's pick</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Roghni Naan" data-price="150">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="breads">
+              <img src="images/dish-roti.svg" alt="Tandoori roti" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Tandoori Roti</h3>
+                  <span class="menu-price">Rs 60</span>
+                </div>
+                <p class="menu-desc">Plain wholewheat roti, straight off the oven wall. The default at every table.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Tandoori Roti" data-price="60">Add to order</button>
+              </div>
+            </article>
+
+            <!-- DESSERTS -->
+            <article class="card menu-card" data-category="desserts">
+              <img src="images/dish-kheer.svg" alt="Bowl of shahi kheer" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Shahi Kheer</h3>
+                  <span class="menu-price">Rs 320</span>
+                </div>
+                <p class="menu-desc">Rice pudding reduced for two hours with cardamom, pistachio and rose.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Shahi Kheer" data-price="320">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="desserts">
+              <img src="images/dish-gulab.svg" alt="Gulab jamun in syrup" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Gulab Jamun</h3>
+                  <span class="menu-price">Rs 280</span>
+                </div>
+                <p class="menu-desc">Warm khoya dumplings in saffron syrup. Two per portion, never three.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Gulab Jamun" data-price="280">Add to order</button>
+              </div>
+            </article>
+
+            <!-- DRINKS -->
+            <article class="card menu-card" data-category="drinks">
+              <img src="images/dish-chai.svg" alt="Cup of Kashmiri chai" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Kashmiri Chai</h3>
+                  <span class="menu-price">Rs 250</span>
+                </div>
+                <p class="menu-desc">Pink, salted and slow-whisked, topped with crushed almond.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                  <li class="tag tag-pick">Chef's pick</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Kashmiri Chai" data-price="250">Add to order</button>
+              </div>
+            </article>
+
+            <article class="card menu-card" data-category="drinks">
+              <img src="images/dish-lassi.svg" alt="Glass of sweet lassi" class="menu-image">
+              <div class="menu-body">
+                <div class="menu-head">
+                  <h3 class="menu-name">Sweet Lassi</h3>
+                  <span class="menu-price">Rs 280</span>
+                </div>
+                <p class="menu-desc">Churned yoghurt, sugar and a float of cream in a steel glass.</p>
+                <ul class="tag-list">
+                  <li class="tag tag-veg">Vegetarian</li>
+                </ul>
+                <button class="btn btn-outline btn-sm add-btn" data-name="Sweet Lassi" data-price="280">Add to order</button>
+              </div>
+            </article>
+
+            <!-- Message shown by JavaScript when a search matches nothing -->
+            <p class="empty-message" id="emptyMessage" hidden>No dish matches that search. Try &ldquo;naan&rdquo; or &ldquo;chai&rdquo;.</p>
+
+          </div>
+
+          <!-- ---- Order panel (filled in by JavaScript) ---- -->
+          <aside class="order-panel" id="orderPanel" aria-label="Your order">
+            <h2 class="order-title">Your order <span class="order-count" id="orderCount">0</span></h2>
+
+            <p class="order-empty" id="orderEmpty">Nothing added yet. Tap <strong>Add to order</strong> on any dish to start a list.</p>
+
+            <ul class="order-list" id="orderList"></ul>
+
+            <div class="order-total">
+              <span>Estimated total</span>
+              <strong id="orderTotal">Rs 0</strong>
+            </div>
+
+            <button class="btn btn-outline btn-sm btn-block" id="clearOrder" type="button">Clear list</button>
+            <a href="contact.html" class="btn btn-primary btn-sm btn-block">Send this with a booking</a>
+
+            <p class="order-note">This list is only a planner — it is not a real online order.</p>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SET MENUS TABLE ============ -->
+    <section class="section section-alt">
+      <div class="container narrow">
+
+        <header class="section-head">
+          <p class="eyebrow">For groups</p>
+          <h2 class="section-title">Set menus</h2>
+          <p class="section-subtitle">Fixed menus for larger tables, ordered at least four hours ahead.</p>
+        </header>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <caption>Set menu prices are per person and include bread and one drink.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Set menu</th>
+                <th scope="col">What's included</th>
+                <th scope="col">Minimum guests</th>
+                <th scope="col">Price / person</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">The Charcoal</th>
+                <td>Three kebabs, karahi, naan, kheer</td>
+                <td>4</td>
+                <td>Rs 2,200</td>
+              </tr>
+              <tr>
+                <th scope="row">The Garden</th>
+                <td>All-vegetarian: chaat, daal, paneer, roti, gulab jamun</td>
+                <td>4</td>
+                <td>Rs 1,650</td>
+              </tr>
+              <tr>
+                <th scope="row">The Rooftop</th>
+                <td>Chef's full tasting menu, seven courses</td>
+                <td>6</td>
+                <td>Rs 3,400</td>
+              </tr>
+              <tr>
+                <th scope="row">The Notebook</th>
+                <td>Nihari, biryani, seekh kebab, roghni naan, lassi</td>
+                <td>8</td>
+                <td>Rs 2,900</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-col">
+        <a class="logo logo-footer" href="index.html">
+          <img src="images/logo.svg" alt="" width="38" height="38">
+          <span class="logo-text">Saffron <em>&amp;</em> Sage</span>
+        </a>
+        <p class="footer-about">A modern Pakistani kitchen in the walled city of Lahore. Charcoal, cast iron and recipes we refuse to modernise.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Explore</h3>
+        <ul class="footer-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Visit us</h3>
+        <ul class="footer-list">
+          <li>14 Fort Road, Walled City</li>
+          <li>Lahore, Punjab 54000</li>
+          <li><a href="tel:+924235551234">+92 42 3555 1234</a></li>
+          <li><a href="mailto:hello@saffronandsage.pk">hello@saffronandsage.pk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Kitchen hours</h3>
+        <ul class="footer-list">
+          <li>Mon &ndash; Thu &middot; 12pm &ndash; 11pm</li>
+          <li>Fri &middot; 2pm &ndash; 12am</li>
+          <li>Sat &ndash; Sun &middot; 12pm &ndash; 12am</li>
+        </ul>
+        <ul class="social-list">
+          <li><a href="#" aria-label="Facebook">Fb</a></li>
+          <li><a href="#" aria-label="Instagram">Ig</a></li>
+          <li><a href="#" aria-label="YouTube">Yt</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year">2026</span> Saffron &amp; Sage. Built for the Web Technologies course.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
