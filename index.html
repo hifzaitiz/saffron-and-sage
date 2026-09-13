@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saffron &amp; Sage | Modern Pakistani Kitchen in Lahore</title>
+  <meta name="description" content="Saffron &amp; Sage is a modern Pakistani kitchen in Lahore serving slow-cooked family recipes, tandoor breads and rooftop dining.">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ SITE HEADER (same on every page) ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+
+      <a class="logo" href="index.html">
+        <img src="images/logo.svg" alt="Saffron and Sage logo" width="42" height="42">
+        <span class="logo-text">Saffron <em>&amp;</em> Sage</span>
+      </a>
+
+      <!-- Hamburger button: only visible on small screens (controlled by CSS + JS) -->
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <nav class="main-nav" id="primaryNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link is-active">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="menu.html" class="nav-link">Menu</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Reserve a table</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-slide">
+        <img src="images/hero-1.svg" alt="Charcoal grilled kebabs on a brass platter" class="hero-image">
+        <div class="hero-caption container">
+          <p class="eyebrow">Lahore &middot; Since 1998</p>
+          <h1 class="hero-title">Slow food, <em>served fast</em> enough</h1>
+          <p class="hero-text">Family recipes from the old city, cooked over charcoal and served on a rooftop that looks straight at the Badshahi Mosque.</p>
+          <div class="hero-actions">
+            <a href="menu.html" class="btn btn-primary">Explore the menu</a>
+            <a href="contact.html" class="btn btn-ghost">Book a table</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HIGHLIGHT STRIP ============ -->
+    <section class="section highlights">
+      <div class="container">
+        <div class="grid grid-3">
+
+          <article class="card highlight-card">
+            <span class="highlight-icon" aria-hidden="true">&#9738;</span>
+            <h2 class="card-title">Cooked over charcoal</h2>
+            <p>Every kebab is grilled on an open coal pit, never on gas. That smoke is the whole point.</p>
+          </article>
+
+          <article class="card highlight-card">
+            <span class="highlight-icon" aria-hidden="true">&#10047;</span>
+            <h2 class="card-title">Spices ground daily</h2>
+            <p>Our garam masala is roasted and ground every morning, using the same ratio since 1998.</p>
+          </article>
+
+          <article class="card highlight-card">
+            <span class="highlight-icon" aria-hidden="true">&#9962;</span>
+            <h2 class="card-title">Rooftop seating</h2>
+            <p>Twenty tables under open sky, with a view of the old city skyline and the evening call to prayer.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SIGNATURE DISHES ============ -->
+    <section class="section section-alt">
+      <div class="container">
+
+        <header class="section-head">
+          <p class="eyebrow">What people order</p>
+          <h2 class="section-title">Our signature plates</h2>
+          <p class="section-subtitle">Four dishes that have not changed since the day we opened — because nobody has let us change them.</p>
+        </header>
+
+        <div class="grid grid-4">
+
+          <article class="card dish-card">
+            <img src="images/dish-karahi.svg" alt="Chicken karahi in a black iron wok" class="dish-image">
+            <div class="dish-body">
+              <h3 class="dish-name">Chicken Karahi</h3>
+              <p class="dish-desc">Wok-fried with tomato, green chilli and a spoon of ginger julienne.</p>
+              <p class="dish-price">Rs 1,450</p>
+            </div>
+          </article>
+
+          <article class="card dish-card">
+            <img src="images/dish-nihari.svg" alt="Bowl of slow cooked mutton nihari" class="dish-image">
+            <div class="dish-body">
+              <h3 class="dish-name">Mutton Nihari</h3>
+              <p class="dish-desc">Eight hours on low heat, finished with marrow and fried onion.</p>
+              <p class="dish-price">Rs 1,250</p>
+            </div>
+          </article>
+
+          <article class="card dish-card">
+            <img src="images/dish-biryani.svg" alt="Plate of Sindhi biryani with saffron rice" class="dish-image">
+            <div class="dish-body">
+              <h3 class="dish-name">Sindhi Biryani</h3>
+              <p class="dish-desc">Layered long-grain rice, potato, plum and a heavy hand with saffron.</p>
+              <p class="dish-price">Rs 850</p>
+            </div>
+          </article>
+
+          <article class="card dish-card">
+            <img src="images/dish-seekh.svg" alt="Seekh kebabs on skewers" class="dish-image">
+            <div class="dish-body">
+              <h3 class="dish-name">Seekh Kebab</h3>
+              <p class="dish-desc">Hand-minced beef, coriander and charcoal. Served with mint chutney.</p>
+              <p class="dish-price">Rs 650</p>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="section-footer-link">
+          <a href="menu.html" class="btn btn-outline">See the full menu</a>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ============ STORY SPLIT ============ -->
+    <section class="section">
+      <div class="container split">
+
+        <div class="split-media">
+          <img src="images/about-story.svg" alt="Our kitchen team working at the tandoor">
+        </div>
+
+        <div class="split-body">
+          <p class="eyebrow">Who we are</p>
+          <h2 class="section-title">A small kitchen with a long memory</h2>
+          <p>Saffron &amp; Sage started as a six-table dhaba on Fort Road. Three generations later we still cook from the same hand-written notebook, only now there is a rooftop above it.</p>
+          <ul class="tick-list">
+            <li>Meat butchered and marinated the same morning</li>
+            <li>No food colouring, ever — the orange comes from chilli</li>
+            <li>Vegetarian and vegan plates on every section of the menu</li>
+            <li>Family-size portions, because that is how we eat at home</li>
+          </ul>
+          <a href="about.html" class="btn btn-outline">Read our story</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section section-dark">
+      <div class="container">
+
+        <header class="section-head">
+          <p class="eyebrow">Kind words</p>
+          <h2 class="section-title">What our guests say</h2>
+        </header>
+
+        <div class="grid grid-3">
+
+          <blockquote class="quote-card">
+            <p>&ldquo;The nihari tastes exactly like my grandmother's, and I have never said that about a restaurant before.&rdquo;</p>
+            <footer><cite>Ayesha Tariq</cite> <span>Gulberg</span></footer>
+          </blockquote>
+
+          <blockquote class="quote-card">
+            <p>&ldquo;We booked the rooftop for eleven people. Nobody complained about anything, which in my family is a record.&rdquo;</p>
+            <footer><cite>Hamza Iqbal</cite> <span>Model Town</span></footer>
+          </blockquote>
+
+          <blockquote class="quote-card">
+            <p>&ldquo;I am vegetarian and I usually get one sad option. Here I had to choose between six. Six!&rdquo;</p>
+            <footer><cite>Meera Das</cite> <span>Visiting from Delhi</span></footer>
+          </blockquote>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CALL TO ACTION ============ -->
+    <section class="cta-band">
+      <div class="container cta-inner">
+        <div>
+          <h2 class="cta-title">Rooftop tables go fast on weekends</h2>
+          <p>Reserve online and we will hold your table for twenty minutes past the booking time.</p>
+        </div>
+        <a href="contact.html" class="btn btn-primary btn-lg">Reserve a table</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ SITE FOOTER (same on every page) ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-col">
+        <a class="logo logo-footer" href="index.html">
+          <img src="images/logo.svg" alt="" width="38" height="38">
+          <span class="logo-text">Saffron <em>&amp;</em> Sage</span>
+        </a>
+        <p class="footer-about">A modern Pakistani kitchen in the walled city of Lahore. Charcoal, cast iron and recipes we refuse to modernise.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Explore</h3>
+        <ul class="footer-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Visit us</h3>
+        <ul class="footer-list">
+          <li>14 Fort Road, Walled City</li>
+          <li>Lahore, Punjab 54000</li>
+          <li><a href="tel:+924235551234">+92 42 3555 1234</a></li>
+          <li><a href="mailto:hello@saffronandsage.pk">hello@saffronandsage.pk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Kitchen hours</h3>
+        <ul class="footer-list">
+          <li>Mon &ndash; Thu &middot; 12pm &ndash; 11pm</li>
+          <li>Fri &middot; 2pm &ndash; 12am</li>
+          <li>Sat &ndash; Sun &middot; 12pm &ndash; 12am</li>
+        </ul>
+        <ul class="social-list">
+          <li><a href="#" aria-label="Facebook">Fb</a></li>
+          <li><a href="#" aria-label="Instagram">Ig</a></li>
+          <li><a href="#" aria-label="YouTube">Yt</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year">2026</span> Saffron &amp; Sage. Built for the Web Technologies course.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
