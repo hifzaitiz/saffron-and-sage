@@ -107,7 +107,7 @@ history shows each feature as its own merge:
 
 ```
 feature-pages              semantic HTML for all five pages
-feature-styles             design system, layout, artwork
+feature-styles             design system, layout, first artwork
 feature-navbar             hamburger menu and shared page behaviour
 feature-hero-slider        home page carousel
 feature-menu-filter        menu filtering, search and order list
@@ -116,6 +116,9 @@ feature-contact-form       client side form validation
 feature-faq-accordion      about page FAQ
 feature-responsive-fixes   small screen layout corrections
 feature-gallery-artwork    redrawn gallery scenes
+docs-readme                project documentation
+refactor-simplify          plain-JavaScript rewrite of every script
+feature-real-photos        real credited photographs instead of drawings
 ```
 
 See the shape of the history with:
