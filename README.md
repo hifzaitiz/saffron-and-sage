@@ -4,9 +4,12 @@ A fully static, five-page website built with **HTML5, CSS3 and vanilla JavaScrip
 for the Web Technologies assignment (BS CS F24 — Morning &amp; Self Support).
 
 No backend, no database, no frameworks, no CSS libraries, and deliberately no advanced
-JavaScript — plain `for` loops, `if` statements and simple DOM methods throughout. Every line of HTML, CSS and
-JavaScript in this repository was written for this project, and all the artwork in
-`images/` is original SVG.
+JavaScript — plain `for` loops, `if` statements and simple DOM methods throughout. Every line
+of HTML, CSS and JavaScript in this repository was written for this project.
+
+The photographs are real pictures of the real dishes, taken from **Wikimedia Commons**
+under Creative Commons licences and credited in [CREDITS.md](CREDITS.md). The logo, the
+contact-page map and the three team portraits are my own SVG drawings.
 
 **Theme:** *Saffron &amp; Sage*, a modern Pakistani kitchen in the walled city of Lahore.
 
@@ -77,7 +80,8 @@ Web_Assignment/
 │   ├── gallery.js      lightbox
 │   ├── contact.js      form validation
 │   └── accordion.js    FAQ
-├── images/             34 original SVG illustrations
+├── images/             29 photographs + 5 SVG drawings
+├── CREDITS.md          photographer and licence for every photograph
 ├── VIVA-NOTES.md       study notes for the viva
 └── README.md
 ```
@@ -138,5 +142,7 @@ git log --oneline --graph --all
 
 - Fonts: [Fraunces](https://fonts.google.com/specimen/Fraunces) and
   [Inter](https://fonts.google.com/specimen/Inter), served by Google Fonts.
-- Illustrations: drawn as SVG for this project.
+- Photographs: Wikimedia Commons contributors — every photo is listed with its
+  photographer and licence in [CREDITS.md](CREDITS.md).
+- Logo, map and team portraits: drawn as SVG for this project.
 - Content, layout and code: original work for the Web Technologies assignment.
