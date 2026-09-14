@@ -112,6 +112,19 @@ stylesheet give it a smaller size. `.section-title` is 42px by default, 34px und
 They are **max-width** queries, so the desktop layout is the default and each
 breakpoint overrides it going down. Be ready to open DevTools and drag the width.
 
+### Why do the links not get a box around them when clicked?
+
+The focus ring is written with `:focus-visible`, not `:focus`:
+
+```css
+a:focus-visible, button:focus-visible { outline: 3px solid var(--saffron); }
+```
+
+`:focus` matches whenever an element has focus, including after a mouse click, which
+put an orange box around every nav link you clicked. `:focus-visible` lets the browser
+decide: it shows the ring when someone is navigating by keyboard (where it is needed)
+and leaves it off for mouse clicks. Press Tab on the page to see it appear.
+
 ### How does the hamburger drawer actually move?
 
 `.main-nav` is `position: fixed` with `transform: translateX(100%)` — parked exactly one
@@ -289,5 +302,11 @@ with `--no-ff` so the merge stays visible in the history instead of being flatte
   and it resets on refresh. It is a planner, and the page says so.
 - The contact form does not email anybody. A static site has no server to send with;
   validation is the part that belongs to the browser.
-- The images are SVG illustrations rather than photographs, so the whole site works
-  offline and the files stay small.
+- **The photographs are not mine.** They come from Wikimedia Commons under Creative
+  Commons licences, and every one is credited by photographer and licence in
+  `CREDITS.md` and in the footer of every page. Say this plainly if asked — using
+  properly licensed and credited photos is normal practice; pretending you shot them
+  is not. The logo, the contact-page map and the three team portraits *are* my own
+  SVG drawings.
+- The team portraits stayed as drawings on purpose: putting a stranger's photograph
+  under a made-up chef's name would be misleading.
